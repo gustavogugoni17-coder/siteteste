@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Gerenciador de Estoque - Site</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f3f3;
+            color: #222;
+        }
+
+        header {
+            background: #222;
+            color: white;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 25px auto;
+        }
+
+        .resumo {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .resumo-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+        }
+
+        .resumo-card h3 {
+            margin-top: 0;
+            color: #666;
+        }
+
+        .resumo-card strong {
+            font-size: 28px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campo label {
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .campo input,
+        .campo textarea {
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+        }
+
+        .campo input:focus,
+        .campo textarea:focus {
+            outline: none;
+            border-color: #155f91;
+        }
+
+        .campo textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            border-radius: 6px;
+            padding: 11px 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: .85;
+        }
+
+        .btn-salvar {
+            background: #222;
+            color: white;
+        }
+
+        .btn-limpar {
+            background: #ddd;
+            color: #222;
+        }
+
+        .btn-editar {
+            background: #444;
+            color: white;
+        }
+
+        .btn-excluir {
+            background: #b00020;
+            color: white;
+        }
+
+        #mensagem {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* PRODUTOS */
+
+        .produtos {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .produto {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .produto-imagem {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .produto-sem-imagem {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eee;
+            color: #777;
+            font-size: 18px;
+        }
+
+        .produto-info {
+            padding: 15px;
+        }
+
+        .produto-info h3 {
+            margin-top: 0;
+        }
+
+        .preco {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .estoque {
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        .estoque-baixo {
+            color: #b00020;
+        }
+
+        .estoque-ok {
+            color: #168000;
+        }
+
+        .observacao {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .produto-botoes {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .produto-botoes button {
+            flex: 1;
+        }
+
+        .vazio {
+            text-align: center;
+            color: #777;
+            padding: 30px;
+        }
+
+        /* RELAÇÃO */
+
+        .cabecalho-relacao-produtos {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .cabecalho-relacao-produtos h2 {
+            margin: 0 0 6px;
+        }
+
+        .cabecalho-relacao-produtos p {
+            margin: 0;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .acoes-relacao-produtos {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            justify-content: flex-end;
+        }
+
+        #pesquisaProduto {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        #pesquisaProduto:focus {
+            border-color: #155f91;
+        }
+
+        #btnImprimirProdutos {
+            background: #222;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .relacao-produtos {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .tabela-relacao-produtos {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tabela-relacao-produtos th {
+            background: #153c57;
+            color: white;
+            padding: 13px;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .tabela-relacao-produtos td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            vertical-align: middle;
+        }
+
+        .tabela-relacao-produtos tr:hover {
+            background: #f7f7f7;
+        }
+
+        .quantidade-estoque {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .situacao-disponivel {
+            color: #168000;
+            font-weight: bold;
+        }
+
+        .situacao-estoque-baixo {
+            color: #c77700;
+            font-weight: bold;
+        }
+
+        .situacao-sem-estoque {
+            color: #b00020;
+            font-weight: bold;
+        }
+
+        .relacao-vazia {
+            text-align: center;
+            padding: 45px 20px;
+            border: 1px dashed #ccc;
+            border-radius: 8px;
+            color: #777;
+        }
+
+        .relacao-vazia-icone {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .relacao-vazia h3 {
+            margin: 0 0 8px;
+            color: #333;
+        }
+
+        .relacao-vazia p {
+            margin: 0;
+        }
+
+        /* IMPRESSÃO */
+
+        @media print {
+
+            body {
+                background: white;
+            }
+
+            header {
+                background: white;
+                color: black;
+                padding: 0;
+                margin-bottom: 20px;
+            }
+
+            .container {
+                width: 100%;
+                max-width: none;
+                margin: 0;
+            }
+
+            .resumo,
+            #formularioProduto,
+            .produtos,
+            .acoes-relacao-produtos,
+            .btn-editar,
+            .btn-excluir {
+                display: none !important;
+            }
+
+            .card {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .cabecalho-relacao-produtos {
+                display: block;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .cabecalho-relacao-produtos p {
+                display: none;
+            }
+
+            .relacao-produtos {
+                overflow: visible;
+            }
+
+            .tabela-relacao-produtos {
+                width: 100%;
+            }
+        }
+
+        /* CELULAR */
+
+        @media (max-width: 700px) {
+
+            .container {
+                width: 94%;
+            }
+
+            .cabecalho-relacao-produtos {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .acoes-relacao-produtos {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            #pesquisaProduto {
+                max-width: none;
+            }
+
+            #btnImprimirProdutos {
+                width: 100%;
+            }
+
+            .tabela-relacao-produtos {
+                min-width: 700px;
+            }
+        }
+
+        /* ==========================================
+           PEDIDOS DOS CLIENTES
+        ========================================== */
+        .pedidos-admin { display:grid; gap:18px; }
+        .acoes-pedidos { display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
+        .btn-atualizar-pedidos { background:#0d6efd; color:#fff; }
+        .btn-apagar-pedidos { background:#b00020; color:#fff; }
+        .pedido { background:#fff; border:1px solid #e1e7ef; border-left:5px solid #0d6efd; border-radius:14px; padding:20px; box-shadow:0 4px 16px rgba(0,0,0,.06); }
+        .pedido-topo { display:flex; justify-content:space-between; align-items:flex-start; gap:15px; flex-wrap:wrap; padding-bottom:12px; border-bottom:1px solid #e5e7eb; }
+        .pedido-topo h3 { margin:0; color:#084298; }
+        .pedido-topo p { margin:7px 0 0; color:#555; }
+        .status { display:inline-flex; align-items:center; padding:7px 12px; border-radius:999px; background:#fff3cd; color:#856404; font-weight:bold; }
+        .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:16px; }
+        .bloco { background:#f7f9fc; border:1px solid #e6ebf1; border-radius:10px; padding:15px; }
+        .bloco h4 { margin:0 0 10px; color:#084298; }
+        .bloco p { margin:7px 0; line-height:1.45; }
+        .produto-linha { display:flex; justify-content:space-between; gap:15px; padding:9px 0; border-bottom:1px solid #ddd; }
+        .produto-linha:last-child { border-bottom:0; }
+        .total { display:flex; justify-content:flex-end; gap:8px; margin-top:14px; font-size:20px; color:#084298; }
+        .observacao { white-space:pre-wrap; line-height:1.5; }
+        .vazio { text-align:center; background:#f7f9fc; border:1px dashed #cbd5e1; padding:40px; border-radius:12px; color:#777; }
+        @media (max-width:700px) { .grid { grid-template-columns:1fr; } .acoes-pedidos { justify-content:stretch; } .acoes-pedidos button { width:100%; } }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>
+        Gerenciador de Estoque
+    </h1>
+
+</header>
+
+<main class="container">
+
+    <!-- RESUMO -->
+
+    <section class="resumo">
+
+        <div class="resumo-card">
+
+            <h3>
+                Produtos
+            </h3>
+
+            <strong id="totalProdutos">
+                0
+            </strong>
+
+        </div>
+
+        <div class="resumo-card">
+
+            <h3>
+                Unidades em estoque
+            </h3>
+
+            <strong id="totalEstoque">
+                0
+            </strong>
+
+        </div>
+
+        <div class="resumo-card">
+
+            <h3>
+                Valor do estoque
+            </h3>
+
+            <strong id="valorEstoque">
+                R$ 0,00
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- FORMULÁRIO -->
+
+    <section
+        class="card"
+        id="formularioProduto"
+    >
+
+        <h2 id="tituloFormulario">
+            Adicionar produto
+        </h2>
+
+        <form id="formProduto">
+
+            <input
+                type="hidden"
+                id="produtoId"
+            >
+
+            <div class="form-grid">
+
+                <div class="campo">
+
+                    <label for="nomeProduto">
+                        Nome do produto
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nomeProduto"
+                        placeholder="Ex.: Caixa de Papelão"
+                        required
+                    >
+
+                </div>
+
+                <div class="campo">
+
+                    <label for="precoProduto">
+                        Preço
+                    </label>
+
+                    <input
+                        type="number"
+                        id="precoProduto"
+                        min="0"
+                        step="0.01"
+                        placeholder="0,00"
+                        required
+                    >
+
+                </div>
+
+                <div class="campo">
+
+                    <label for="estoqueProduto">
+                        Estoque
+                    </label>
+
+                    <input
+                        type="number"
+                        id="estoqueProduto"
+                        min="0"
+                        step="1"
+                        placeholder="0"
+                        required
+                    >
+
+                </div>
+
+                <div class="campo">
+
+                    <label for="imagemProduto">
+                        Imagem
+                    </label>
+
+                    <input
+                        type="text"
+                        id="imagemProduto"
+                        placeholder="exemplo.jpg"
+                    >
+
+                </div>
+
+                <div
+                    class="campo"
+                    style="grid-column:1 / -1;"
+                >
+
+                    <label for="observacaoProduto">
+                        Observação
+                    </label>
+
+                    <textarea
+                        id="observacaoProduto"
+                        placeholder="Digite uma observação sobre o produto..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+            <div class="botoes">
+
+                <button
+                    type="submit"
+                    class="btn-salvar"
+                >
+                    💾 Salvar produto
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-limpar"
+                    id="btnLimpar"
+                >
+                    🧹 Limpar
+                </button>
+
+            </div>
+
+            <div id="mensagem"></div>
+
+        </form>
+
+    </section>
+
+
+    <!-- PRODUTOS CADASTRADOS -->
+
+    <section class="card">
+
+        <h2>
+            📦 Produtos cadastrados
+        </h2>
+
+        <div
+            id="listaProdutos"
+            class="produtos"
+        ></div>
+
+    </section>
+
+
+    <!-- RELAÇÃO -->
+
+    <section
+        class="card"
+        id="secaoRelacaoProdutos"
+    >
+
+        <div class="cabecalho-relacao-produtos">
+
+            <div>
+
+                <h2>
+                    📋 Relação de Produtos da Loja
+                </h2>
+
+                <p>
+                    Produtos cadastrados no estoque
+                </p>
+
+            </div>
+
+            <div class="acoes-relacao-produtos">
+
+                <input
+                    type="text"
+                    id="pesquisaProduto"
+                    placeholder="🔎 Pesquisar produto..."
+                    autocomplete="off"
+                >
+
+                <button
+                    type="button"
+                    id="btnImprimirProdutos"
+                    class="btn-salvar"
+                >
+                    🖨️ Imprimir relação
+                </button>
+
+            </div>
+
+        </div>
+
+        <div
+            id="relacaoProdutos"
+            class="relacao-produtos"
+        ></div>
+
+    </section>
+
+
+    <!-- ==========================================
+         PEDIDOS DOS CLIENTES
+    ========================================== -->
+    <section class="card" id="secaoPedidos">
+        <div class="cabecalho-relacao-produtos">
+            <div>
+                <h2>🛒 Pedidos dos clientes</h2>
+                <p>Veja produtos, cliente, endereço, pagamento e observações.</p>
+            </div>
+        </div>
+
+        <div class="acoes-pedidos">
+            <button type="button" id="atualizar" class="btn-atualizar-pedidos">🔄 Atualizar pedidos</button>
+            <button type="button" id="limpar" class="btn-apagar-pedidos">🗑️ Apagar todos os pedidos</button>
+        </div>
+
+        <div id="listaPedidos" class="pedidos-admin"></div>
+    </section>
+
+</main>
+
+<script src="estoque.js"></script>
+<script src="admin.js"></script>
+
+</body>
+
+</html>

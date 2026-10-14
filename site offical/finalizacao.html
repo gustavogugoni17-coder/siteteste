@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site</title>
+<link rel="stylesheet" href="finalizacao.css">
+</head>
+<body>
+<header class="cabecalho">
+  <h1>Site</h1>
+  <a href="comprar.html">← Voltar</a>
+</header>
+
+<main>
+<section class="card">
+  <h2>Finalizar pedido</h2>
+  <p>Preencha os dados para entrega.</p>
+
+  <form id="pedidoForm">
+    <label>Nome completo<input id="nome" required></label>
+    <label>Telefone<input id="telefone" required></label>
+    <label>Endereço<input id="endereco" required placeholder="Rua, avenida..."></label>
+    <div class="duas-colunas">
+      <label>Número<input id="numero" required></label>
+      <label>Complemento<input id="complemento"></label>
+    </div>
+    <div class="duas-colunas">
+      <label>Bairro<input id="bairro" required></label>
+      <label>Cidade<input id="cidade" required></label>
+    </div>
+    <label>CEP<input id="cep" inputmode="numeric"></label>
+    <label>Observação do pedido<textarea id="observacao" rows="4" placeholder="Ex.: deixar na portaria..."></textarea></label>
+
+    <fieldset>
+      <legend>Forma de pagamento</legend>
+      <label class="radio"><input type="radio" name="pagamento" value="Pix" required> Pix</label>
+      <label class="radio"><input type="radio" name="pagamento" value="Dinheiro"> Dinheiro</label>
+      <label class="radio"><input type="radio" name="pagamento" value="Cartão"> Cartão</label>
+    </fieldset>
+
+    <div id="resumoFinal" class="resumo-final"></div>
+    <button class="botao" type="submit">Confirmar pedido</button>
+  </form>
+</section>
+</main>
+<footer>© 2026 Site</footer>
+<script src="finalizacao.js"></script>
+</body>
+</html>

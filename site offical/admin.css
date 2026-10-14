@@ -1,0 +1,313 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#eef4fb;color:#172033}
+.cabecalho{background:#0d6efd;color:#fff;padding:17px 6%;display:flex;justify-content:space-between;align-items:center}
+.cabecalho h1{margin:0}.cabecalho a{color:#fff;text-decoration:none;margin-left:14px}
+main{max-width:1150px;margin:auto;padding:25px 18px}.titulo{text-align:center}.titulo h2{font-size:34px;color:#084298}
+.acoes{display:flex;gap:10px;margin:20px 0;justify-content:flex-end;flex-wrap:wrap}
+.botao{padding:11px 16px;border:0;border-radius:8px;background:#0d6efd;color:#fff;font-weight:bold;cursor:pointer}.perigo{background:#dc3545}
+.pedidos{display:grid;gap:18px}.pedido{background:#fff;border-radius:15px;padding:22px;box-shadow:0 4px 16px rgba(0,0,0,.07);border-left:5px solid #0d6efd}
+.pedido-topo{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid #e5e7eb;padding-bottom:12px}
+.pedido h3{margin:0;color:#084298}.status{padding:6px 10px;border-radius:20px;background:#fff3cd;color:#856404;font-weight:bold}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:15px}.bloco{background:#f7f9fc;border-radius:10px;padding:14px}.bloco h4{margin-top:0;color:#084298}
+.produto-linha{display:flex;justify-content:space-between;border-bottom:1px solid #ddd;padding:8px 0;gap:10px}.total{font-size:21px;text-align:right;margin-top:15px;color:#084298}.observacao{white-space:pre-wrap}
+.vazio{text-align:center;background:#fff;padding:40px;border-radius:15px;color:#777}
+footer{text-align:center;background:#172033;color:#fff;padding:25px;margin-top:30px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.cabecalho{flex-direction:column;gap:10px}}
+/* ==========================================
+   RELAÇÃO DE PRODUTOS
+========================================== */
+
+.cabecalho-relacao-produtos {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+.cabecalho-relacao-produtos h2 {
+    margin: 0;
+}
+
+
+.acoes-relacao-produtos {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex: 1;
+
+    justify-content: flex-end;
+}
+
+
+.acoes-relacao-produtos input {
+    width: 100%;
+
+    max-width: 500px;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 7px;
+
+    box-sizing: border-box;
+}
+
+
+.acoes-relacao-produtos button {
+    padding: 12px 16px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #222;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+.acoes-relacao-produtos button:hover {
+    background: #444;
+}
+
+
+/* ==========================================
+   LISTA
+========================================== */
+
+.relacao-produtos {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(250px, 1fr)
+        );
+
+    gap: 18px;
+}
+
+
+/* ==========================================
+   CARD
+========================================== */
+
+.produto-relacao {
+    display: flex;
+
+    gap: 15px;
+
+    background: #fff;
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    box-sizing: border-box;
+
+    transition: 0.2s;
+}
+
+
+.produto-relacao:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 0, 0, 0.10);
+}
+
+
+/* ==========================================
+   IMAGEM
+========================================== */
+
+.produto-relacao-imagem {
+    width: 90px;
+
+    height: 90px;
+
+    flex-shrink: 0;
+
+    background: #f5f5f5;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.produto-relacao-imagem img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.imagem-sem-produto {
+    font-size: 35px;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+
+    height: 100%;
+}
+
+
+/* ==========================================
+   INFORMAÇÕES
+========================================== */
+
+.produto-relacao-info {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.produto-relacao-info h3 {
+    margin: 0 0 8px;
+
+    font-size: 17px;
+}
+
+
+.produto-relacao-preco {
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-bottom: 7px;
+}
+
+
+.produto-relacao-estoque {
+    font-size: 13px;
+
+    margin-bottom: 8px;
+}
+
+
+.estoque-normal {
+    color: #168000;
+}
+
+
+.estoque-baixo {
+    color: #d68b00;
+}
+
+
+.sem-estoque {
+    color: #c62828;
+}
+
+
+.produto-relacao-observacao {
+    background: #f4f7fa;
+
+    padding: 7px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   VAZIO
+========================================== */
+
+.relacao-vazia {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 40px;
+
+    border: 1px dashed #ccc;
+
+    border-radius: 10px;
+
+    color: #777;
+}
+
+
+.relacao-vazia div {
+    font-size: 40px;
+
+    margin-bottom: 10px;
+}
+
+
+.relacao-vazia h3 {
+    margin: 0 0 5px;
+
+    color: #333;
+}
+
+
+.relacao-vazia p {
+    margin: 0;
+}
+
+
+/* ==========================================
+   CELULAR
+========================================== */
+
+@media (max-width: 700px) {
+
+    .cabecalho-relacao-produtos {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .acoes-relacao-produtos {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .acoes-relacao-produtos input {
+        max-width: none;
+    }
+
+
+    .relacao-produtos {
+        grid-template-columns: 1fr;
+    }
+
+}

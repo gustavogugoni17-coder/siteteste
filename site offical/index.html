@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site</title>
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="cabecalho">
+    <h1>Site</h1>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="comprar.html">Comprar</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <h2>Bem-vindo</h2>
+        <p>Escolha seus produtos e faça seu pedido.</p>
+        <a class="botao" href="#produtos">Ver produtos</a>
+    </section>
+
+    <section class="loja-container" id="produtos">
+        <section class="area-produtos">
+            <div class="cabecalho-produtos">
+                <div>
+                    <h2>🛍️ Produtos da Loja</h2>
+                    <p>Confira nossos produtos disponíveis</p>
+                </div>
+                <div class="pesquisa-produtos">
+                    <input type="text" id="pesquisaProdutosLoja" placeholder="🔎 Pesquisar produto..." autocomplete="off">
+                </div>
+            </div>
+
+            <div id="listaProdutosLoja" class="lista-produtos-loja"></div>
+        </section>
+
+        <section class="relacao-itens">
+            <div class="titulo-relacao">
+                <div>
+                    
+                </div>
+            </div>
+
+
+    <section class="informacoes">
+        <h2>Como funciona</h2>
+        <div class="grade-info">
+            <article><strong>1.</strong><span>Escolha os produtos.</span></article>
+            <article><strong>2.</strong><span>Confira sua relação de itens.</span></article>
+            <article><strong>3.</strong><span>Informe seus dados e endereço e confirme o pedido.</span></article>
+        </div>
+    </section>
+</main>
+
+<footer>© 2026 Site</footer>
+
+<script src="produtos-loja.js"></script>
+</body>
+</html>

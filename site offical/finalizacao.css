@@ -1,0 +1,30 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#eef4fb;color:#172033}
+.cabecalho{background:#0d6efd;color:#fff;padding:17px 6%;display:flex;justify-content:space-between;align-items:center}
+.cabecalho h1{margin:0}.cabecalho a{color:#fff;text-decoration:none}
+main{max-width:760px;margin:auto;padding:25px 15px}.card{background:#fff;border-radius:15px;padding:28px;box-shadow:0 5px 20px rgba(0,0,0,.08)}
+h2{color:#084298}
+label{display:block;font-weight:bold;margin:15px 0 6px}
+input,textarea{width:100%;padding:12px;border:1px solid #b6d4fe;border-radius:8px;font:inherit}
+.duas-colunas{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+fieldset{border:1px solid #dbe7f5;border-radius:10px;padding:15px;margin-top:18px}.radio{display:inline-flex;margin:5px 15px 5px 0;align-items:center;gap:6px}.radio input{width:auto}
+.resumo-final{background:#f4f7fb;border-radius:10px;padding:15px;margin-top:20px}
+.botao{width:100%;margin-top:20px;padding:14px;border:0;border-radius:8px;background:#0d6efd;color:#fff;font-size:17px;font-weight:bold;cursor:pointer}
+footer{text-align:center;background:#172033;color:#fff;padding:25px;margin-top:30px}
+@media(max-width:600px){.duas-colunas{grid-template-columns:1fr}.card{padding:20px}}
+
+/* ==========================================
+   RESUMO PROFISSIONAL DO PEDIDO
+========================================== */
+.resumo-final {
+    margin: 22px 0;
+    padding: 18px;
+    background: #f7f9fc;
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+}
+.resumo-titulo { font-size: 18px; font-weight: bold; margin-bottom: 12px; color: #084298; }
+.resumo-item { display:flex; justify-content:space-between; gap:15px; padding:9px 0; border-bottom:1px solid #e5e7eb; }
+.resumo-item:last-child { border-bottom:0; }
+.resumo-total { display:flex; justify-content:space-between; margin-top:14px; padding-top:14px; border-top:2px solid #0d6efd; font-size:20px; }
+@media (max-width:600px) { .resumo-item { flex-direction:column; gap:3px; } }

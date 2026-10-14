@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Site</title><link rel="stylesheet" href="site.css"></head>
+<body>
+<header class="cabecalho"><h1>Site</h1><nav><a href="index.html">Início</a><a href="comprar.html">Comprar</a><a href="admin.html">Pedidos</a></nav></header>
+<main><section class="hero"><h2>Pedido confirmado!</h2><p id="mensagem">Seu pedido foi registrado.</p><a class="botao" href="comprar.html">Fazer novo pedido</a></section></main>
+<footer>© 2026 Site</footer>
+<script>
+try{
+ const p=JSON.parse(localStorage.getItem("ultimoPedido")||"null");
+ if(p) document.getElementById("mensagem").textContent="Pedido #"+p.id+" registrado com sucesso.";
+}catch{}
+</script>
+</body>
+</html>
